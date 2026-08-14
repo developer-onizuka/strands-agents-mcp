@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: strands-agents
+  labels:
+    app: strands-agents
+spec:
+  containers:
+  - name: strands-agents
+    image: python:3.11-slim
+    command: ["sleep", "infinity"]
