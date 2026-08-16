@@ -7,6 +7,8 @@ MCPのSSE通信は、コネクションを維持したままメッセージを�
 そのため、システム全体の同期アーキテクチャは維持しつつ、MCPとの通信部分のみを非同期処理にしてコネクションを適切に管理することで、安定性を損なわない安全な統合を実現しています。
 
 
+顔の位置を特定してください。ファイルパスは/strands-agents-mcp/mcp/Bill.jpgです。
+
 root@strands-agents:/# python3 agent-module3.py 
 --- Running Direct Test ---
 

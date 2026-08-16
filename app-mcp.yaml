@@ -32,7 +32,7 @@ spec:
       containers:
       - name: mcp
         image: developeronizuka/mcp:1.0.0
-        imagePullPolicy: Always
+        #imagePullPolicy: Always
         #command: ["sleep", "infinity"]
         ports:
         - containerPort: 5001
