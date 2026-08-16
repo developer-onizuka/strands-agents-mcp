@@ -112,6 +112,6 @@ kubectl apply -f flask-mcp.yaml
 ```
 顔の位置を特定してください。ファイルパスは/strands-agents-mcp/mcp/Bill.jpgです。
 ```
-プロンプト入力後、当該MCPサーバーの許可が求められ、以下のように顔の座標が表示されれば成功となる。<br>
+プロンプト入力後、当該MCPサーバーの許可が求められ、以下のように顔の座標が表示されれば成功となる。<br><br>
 <img src="https://github.com/developer-onizuka/strands-agents-mcp/blob/main/flask.png" width="720">
 
