@@ -112,9 +112,21 @@ kubectl apply -f flask-mcp.yaml
 ```
 
 # 4. プロンプトの入力
+以下コマンドで、svc-flask-mcpのEXTERNAL-IPを調べて、PC上のブラウザからアクセスします。以下の例では、192.168.33.4:8000にアクセスすることになります。
+```
+$ kubectl get svc
+NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
+face-recognizer-api-svc   LoadBalancer   10.99.114.218    192.168.33.2   5000:30672/TCP   97m
+kubernetes                ClusterIP      10.96.0.1        <none>         443/TCP          108m
+svc-flask-mcp             LoadBalancer   10.106.131.177   192.168.33.4   8000:31939/TCP   91m
+svc-mcp                   LoadBalancer   10.100.90.226    192.168.33.3   5001:31947/TCP   91m
+svc-ollama                ClusterIP      10.106.254.70    <none>         11434/TCP        101m
+```
+
+次に以下のプロンプトを画面のテキストボックスにコピペしてPOSTボタンを押します。
 ```
 顔の位置を特定してください。ファイルパスは/strands-agents-mcp/mcp/Bill.jpgです。
 ```
-プロンプト入力後、当該MCPサーバーの許可が求められ、以下のように顔の座標が表示されれば成功とです。<br><br>
+プロンプト入力後、当該MCPサーバーの許可が求められ、以下のように顔の座標が表示されれば成功です。<br><br>
 <img src="https://github.com/developer-onizuka/strands-agents-mcp/blob/main/flask.png" width="720">
 
