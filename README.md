@@ -53,7 +53,7 @@ sequenceDiagram
     participant MCPServer as MCP Server (svc-mcp)
     participant External as SaaS / Storage
 
-    Note over WebApp,MCPServer: 1. ツールの事前取得 (起動時/リクエスト前)
+    Note over Client,External: 1. ツールの事前取得 (起動時/リクエスト前)
     WebApp->>MCPServer: tools/list
     MCPServer-->>WebApp: ツール定義一覧 (JSON Schema)
 
