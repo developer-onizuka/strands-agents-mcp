@@ -84,11 +84,11 @@ Web App（MCP Client）は、システム起動時またはリクエスト処理
 - レスポンス: ツール名、概要説明、引数のスキーマ（JSON Schema）<br>
 
 #### 1-2-2. ユーザー要求とツールの選択
-ユーザーがブラウザから「アップロードした顔写真を解析してストレージに保存して」のような指示を入力すると、Web App はユーザーのプロンプトと事前に取得したツール定義一覧を結合して Ollama (Llama 3.2) に送信します。
+ユーザーがブラウザから「ストレージに格納済みの顔写真を解析して座標を算出して」のような指示を入力すると、Web App はユーザーのプロンプトと事前に取得したツール定義一覧を結合して Ollama (Llama 3.2) に送信します。
 
 #### 1-2-3. LLMによる推論・ツール選択
 LLM は Function Calling（Tool Calling）機能を用いて以下のように思考します。<br>
-- 意図の理解: 「顔写真の解析」と「ストレージ保存」が必要であると分析。<br>
+- 意図の理解: 「ストレージへのアクセス」と「顔写真の解析」が必要であると分析。<br>
 - ツールの照合: 提示されたツール定義の中から、該当する関数（例: detect_faces）を特定。<br>
 - パラメータの構築: 実行に必要な引数を抽出・構成。<br>
 
@@ -103,10 +103,7 @@ LLM はユーザーへの直接的な返答ではなく、構造化データ（J
   }
 }
 ```
-その後、Web App（MCP Client）は LLM からの指示に基づき、MCP Server のエンドポイントに対して tools/call を実行します（通信には JSON / SSE などを使用）。<br>
-- MCP Server (app-mcp.py) がリクエストを処理。<br>
-- 外部の faceRecognizerAPI（SaaS API） や Object Storage と通信。<br>
-- 処理結果を Web App へ返却。<br>
+その後、Web App（MCP Client）は LLM からの指示に基づき、MCP Server のエンドポイントに対して tools/call を実行します（通信には JSON / SSE などを使用）。それを、MCP Server (app-mcp.py) でリクエストを処理します。この後、外部の faceRecognizerAPI（SaaS API） や Object Storage と通信し、処理結果を Web App へ返却することになります。<br>
 
 #### 1-2-5. 最終回答の生成
 Web App は取得した実行結果を再度 Ollama (LLM) へ入力します。LLM はその結果を解釈し、ユーザー向けの最終回答文を生成してブラウザへ表示します。
