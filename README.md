@@ -51,8 +51,8 @@ LLM（Ollama）に対して、ローカル関数（簡単な計算等）とMCP�
 sequenceDiagram
     autonumber
     participant Client as Client PC / Browser
-    participant WebApp as Web App (MCP Client)
     participant LLM as Ollama (Llama 3.2)
+    participant WebApp as Web App (MCP Client)
     participant MCPServer as MCP Server (svc-mcp)
     participant External as SaaS / Storage
 
