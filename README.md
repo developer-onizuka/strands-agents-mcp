@@ -11,21 +11,24 @@ LLM（Ollama）に対して、ローカル関数（簡単な計算等）とMCP�
 ```
                                     Client PC 
                                 +---------------------+
-                                |  Browser            |
-                                |                     |
+                                | Browser             | #3-12
+                                +----------+----------+
+                                           |
+                                +----------+----------+
+                                | LoadBalancer        | #3-7
                                 +----------+----------+
                                            |
                                            |
    Enterprise Server (Kubernetes Cluster)  |
 +-----------------------+       +----------|----------+              +-------------------------+
-| Ollama                |       | Web App  |          |              | MCP Server (SSE)        |
+| Ollama                |       | Web App  |          |              | MCP Server (SSE)        | #3-8
 |  +-----------------+  |       |          V          |              |                         |
 |  |     [ LLM ]     |<------------  [Your Prompt]    |  mcp-remote  |  +-------------------+  |
 |  |    (Llama3.2)   |          |  +---------------+  |  (JSON/SSE)  |  | svc-mcp           |  |
 |  |                 |------------>|  MCP Client   |--+------------->|  | (LoadBalancer IP) |  |
 |  +-----------------+  |       |  +---------------+  |              |  +---------+---------+  |
 +-----------------------+       +---------------------+              |            |            |                Enterprise Storage
-                                                                     |  +---------v---------+  |   Data Req    +------------------+
+                 #3-10                          #3-11                |  +---------v---------+  |   Data Req    +------------------+
                                                                      |  | Pod: mcp-server   |----------------->|  Object Storage  |
                                                                      |  | (app-mcp.py)      |<-----------------|                  |
                                                                      |  +---------+---------+  |   Data Read   +------------------+
@@ -35,7 +38,7 @@ LLM（Ollama）に対して、ローカル関数（簡単な計算等）とMCP�
                                                                                   |
                                                                         SaaS API  |
                                                                      +------------|------------+        
-                                                                     |  +---------v---------+  |
+                                                                     |  +---------v---------+  | #3-9
                                                                      |  | faceRecognizerAPI |  |
                                                                      |  +-------------------+  |
                                                                      +-------------------------+
@@ -144,7 +147,7 @@ kubectl exec -it pods/ollama-xxxxxxxxxx-xxxxx -- ollama pull llama3.2:3b
 kubectl apply -f flask-mcp.yaml
 ```
 
-# 4. プロンプトの入力
+### 3-12. プロンプトの入力
 以下コマンドで、svc-flask-mcpのEXTERNAL-IPを調べて、PC上のブラウザからアクセスします。以下の例では、192.168.33.4:8000にアクセスすることになります。
 ```
 $ kubectl get svc
@@ -163,3 +166,4 @@ svc-ollama                ClusterIP      10.106.254.70    <none>         11434/T
 プロンプト入力後、以下のように顔の座標が表示されれば成功です。<br><br>
 <img src="https://github.com/developer-onizuka/strands-agents-mcp/blob/main/flask.png" width="720">
 
+# 4. まとめ
