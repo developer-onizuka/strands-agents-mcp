@@ -169,24 +169,19 @@ svc-ollama                ClusterIP      10.106.254.70    <none>         11434/T
 # 4. まとめ
 Enterprise環境（Kubernetes等）におけるローカルLLM（Ollama）およびMCPを活用し、Strands AgentをWebサーバー（Flask）としてカプセル化したAIエージェント環境を構築してみました。
 
-#### アーキテクチャの特徴とコアコンポーネント
-Strands Agent (Flask Web Server)
-
-役割: ユーザーインターフェース（Web UI）およびエージェントオーケストレーター
-
+### 4-1. アーキテクチャの特徴とコアコンポーネント
+#### Strands Agent (Flask Web Server)
+役割: ユーザーインターフェース（Web UI）およびエージェントオーケストレーター<br>
 機能: ブラウザからのプロンプト入力の受付、推論実行（Ollama呼び出し）、ツール実行判定（MCP Client機能）、レスポンスの統合制御を担当。
 
 #### LLM Engine (Ollama on Enterprise Server)
-
-役割: プライベート環境での推論処理
-
+役割: プライベート環境での推論処理<br>
 機能: 外部クラウド（Anthropic Cloud等）を介さず、オンプレミス／Kubernetes上で安全にオープンモデル推論を実行。
 
 #### MCP Server & External Services
-
-役割: データ・ツールの統合基盤
-
+役割: データ・ツールの統合基盤<br>
 機能: MCP (Model Context Protocol) 準拠のインターフェース（app-mcp.py）を提供し、Enterprise Storage（Object Storage）のデータ読み書きや外部SaaS API（顔認識API等）との連携を安全に仲介。
 
 
-今後の課題としては、長時間の推論やツール実行におけるレスポンス遅延・ブロッキングを回避するためのFastAPI（ASGI）やSSEストリーミングへの移行によるUX向上、JWT等を用いたユーザー権限のMCP Serverへの伝播によるエンドツーエンドのアクセス制御、そしてマルチステップ処理の追跡を可能にするOpenTelemetry等の分散トレーシングの導入が挙げられます。
+### 4-2. 今後の課題
+長時間の推論やツール実行におけるレスポンス遅延・ブロッキングの回避やSSEストリーミングへの移行によるUX向上、JWT等を用いたユーザー権限のMCP Serverへの伝播によるエンドツーエンドのアクセス制御、OpenTelemetry等のトレーシング機能を追加したいと思っています。
