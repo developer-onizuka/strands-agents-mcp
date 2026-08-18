@@ -36,10 +36,10 @@ spec:
         env:
         - name: CUDA_VISIBLE_DEVICES
           value: "-1"
-        volumeMounts:
-        - name: ollama-csi-data
-          mountPath: /root/.ollama
-      volumes:
-      - name: ollama-csi-data
-        persistentVolumeClaim:
-          claimName: pvc-nfs-ollama
+#        volumeMounts:
+#        - name: ollama-csi-data
+#          mountPath: /root/.ollama
+#      volumes:
+#      - name: ollama-csi-data
+#        persistentVolumeClaim:
+#          claimName: pvc-nfs-ollama
