@@ -23,7 +23,7 @@ CRITICAL RULES:
 4. Mention the tool name used at the end of your answer.
 """
 
-def run_agent(prompt_text: str) -> str:
+def agent(prompt_text: str) -> str:
     """Flask等から呼び出されるエージェント実行用エントリーポイント"""
     with mcp_client:
         mcp_tools = mcp_client.list_tools_sync()
@@ -36,5 +36,4 @@ def run_agent(prompt_text: str) -> str:
 
 if __name__ == "__main__":
     print("--- Running Direct Test ---")
-    res = run_agent("顔の位置を特定してください。ファイルパスは/strands-agents-mcp/mcp/Bill.jpgです。")
-    print(res)
+    agent("顔の位置を特定してください。ファイルパスは/strands-agents-mcp/mcp/Bill.jpgです。")

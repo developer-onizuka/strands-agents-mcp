@@ -49,6 +49,7 @@ agent = Agent(
 
 if __name__ == "__main__":
     print("--- Running Direct Test ---")
-    print(agent("What is 50 plus 70? Please also tell me which tool you used."))
-    print(agent("顔の位置を特定してください。ファイルパスは/faceRecognizerAPI-mcp/Bill.jpgです。"))
+    agent("What is 50 plus 70? Please also tell me which tool you used.")
+    agent("顔の位置を特定してください。ファイルパスは/strands-agents-mcp/mcp/Bill.jpgです。")
+
 
