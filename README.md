@@ -125,8 +125,8 @@ Web App は取得した実行結果を再度 Ollama (LLM) へ入力します。L
 ### 3-3. gitのインストール & git clone
 >https://git-scm.com/downloads
 ```
-git clone https://github.com/developer-onizuka/faceRecognizerAPI-mcp
-cd faceRecognizerAPI-mcp
+git clone https://github.com/developer-onizuka/strands-agents-mcp
+cd strands-agents-mcp
 ```
 
 ### 3-4. Master node / Worker nodeを起動する
@@ -140,8 +140,8 @@ cd ..
 ```
 cd kubernetes
 vagrant ssh master
-git clone https://github.com/developer-onizuka/faceRecognizerAPI-mcp
-cd faceRecognizerAPI-mcp
+git clone https://github.com/developer-onizuka/strands-agents-mcp
+cd strands-agents-mcp
 ```
 
 ### 3-6. Kubernetesクラスタの確認
@@ -249,4 +249,4 @@ Enterprise環境（Kubernetes等）におけるローカルLLM（Ollama）およ
 
 
 ### 4-2. 今後の課題
-長時間の推論やツール実行におけるレスポンス遅延・ブロッキングの回避やSSEストリーミングへの移行によるUX向上、JWT等を用いたユーザー権限のMCP Serverへの伝播によるエンドツーエンドのアクセス制御、OpenTelemetry等のトレーシング機能を追加したいと思っています。
+長時間の推論やツール実行におけるレスポンス遅延・ブロッキングの回避やSSEストリーミングを意識したasyncioを追加したいと思っています。
