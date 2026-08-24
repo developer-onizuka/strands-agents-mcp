@@ -8,4 +8,8 @@ spec:
   containers:
   - name: strands-agents
     image: python:3.11-slim
-    command: ["sleep", "infinity"]
+    command: ["/bin/sh", "-c"]
+    args:
+      - |
+        pip install strands-agents ollama strands-agents-tools && \
+        sleep infinity
