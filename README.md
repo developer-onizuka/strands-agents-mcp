@@ -186,9 +186,7 @@ kubectl apply -f metallb-ipaddress.yaml
 ```
 kubectl apply -f app-mcp.yaml
 ```
-本Podは、Strands Agents SDKを通じてLLMを拡張するMCPクライアントとして機能します。また、同期型のFlaskやStrands環境と非同期前提のMCPサーバーを連携させるため、ツール関数内で局所的にasyncio.run()を使用しています。
-
-MCPのSSE通信は、コネクションを維持したままメッセージをやり取りするステートフルなプロトコルです。これを同期処理で実装すると、データ待機中に実行スレッドがブロックされ、複数アクセス時にFlaskのワーカースレッドが枯渇してシステムがフリーズする危険があるため、システム全体の同期アーキテクチャは維持しつつ、MCPとの通信部分のみを非同期処理にしています。
+事前にDockerfileでBuild済のコンテナイメージをDockerhubからダウンロードしてきます。
 
 ### 3-9. faceRecognizerAPIを起動
 ```
@@ -211,6 +209,9 @@ kubectl exec -it pods/ollama-xxxxxxxxxx-xxxxx -- ollama pull llama3.2:3b
 ```
 kubectl apply -f flask-mcp.yaml
 ```
+本Podは、Strands Agents SDKを通じてLLMを拡張するMCPクライアントとして機能します。また、同期型のFlaskやStrands環境と非同期前提のMCPサーバーを連携させるため、ツール関数内で局所的にasyncio.run()を使用しています。
+
+MCPのSSE通信は、コネクションを維持したままメッセージをやり取りするステートフルなプロトコルとなり、これを同期処理で実装すると、データ待機中に実行スレッドがブロックされ、複数アクセス時にFlaskのワーカースレッドが枯渇してシステムがフリーズする危険があるため、システム全体の同期アーキテクチャは維持しつつ、MCPとの通信部分のみを非同期処理にしています。
 
 ### 3-12. プロンプトの入力
 以下コマンドで、svc-flask-mcpのEXTERNAL-IPを調べて、PC上のブラウザからアクセスします。以下の例では、192.168.33.4:8000にアクセスすることになります。
