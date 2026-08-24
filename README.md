@@ -191,8 +191,6 @@ kubectl apply -f app-mcp.yaml
 ### 3-9. faceRecognizerAPIを起動
 faceRecognizerAPIを動かすPodを起動します。
 ```
-git clone https://github.com/developer-onizuka/faceRecognizerAPI-mcp
-cd faceRecognizerAPI-mcp
 kubectl apply -f faceRecognizerAPI.yaml
 kubectl exec -it pods/face-recognizer-api-xxxxxxxxxx-xxxxx -- /bin/bash
 ```
