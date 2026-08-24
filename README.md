@@ -182,13 +182,7 @@ metallb-system   speaker-v8vn6                              1/1     Running   0 
 kubectl apply -f metallb-ipaddress.yaml
 ```
 
-### 3-8. MCP Serverを起動
-```
-kubectl apply -f app-mcp.yaml
-```
-事前にDockerfileでBuild済のコンテナイメージをDockerhubからダウンロードしてきます。
-
-### 3-9. faceRecognizerAPIを起動
+### 3-8. faceRecognizerAPIを起動
 faceRecognizerAPIを動かすPodを起動します。
 ```
 kubectl apply -f faceRecognizerAPI.yaml
@@ -202,6 +196,12 @@ pip install face_recognition flask opencv-python-headless
 cd faceRecognizerAPI/
 python3 faceRecognizerAPI.py 
 ```
+
+### 3-9. MCP Serverを起動
+```
+kubectl apply -f app-mcp.yaml
+```
+事前にDockerfileでBuild済のコンテナイメージをDockerhubからダウンロードしてきます。
 
 ### 3-10. ollamaを起動
 ```
