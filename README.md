@@ -189,9 +189,15 @@ kubectl apply -f app-mcp.yaml
 事前にDockerfileでBuild済のコンテナイメージをDockerhubからダウンロードしてきます。
 
 ### 3-9. faceRecognizerAPIを起動
+faceRecognizerAPIを動かすPodを起動します。
 ```
+git clone https://github.com/developer-onizuka/faceRecognizerAPI-mcp
+cd faceRecognizerAPI-mcp
 kubectl apply -f faceRecognizerAPI.yaml
 kubectl exec -it pods/face-recognizer-api-xxxxxxxxxx-xxxxx -- /bin/bash
+```
+起動後、PodにログインしAPIを起動して、MCPサーバーからのアクセスを待ち受けます。
+```
 git clone https://github.com/developer-onizuka/faceRecognizerAPI
 apt update && apt install -y cmake build-essential git
 pip install face_recognition flask opencv-python-headless
